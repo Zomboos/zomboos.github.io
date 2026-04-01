@@ -1,16 +1,75 @@
-html{
-    padding: 0;
-    margin: 0;
-background-color: gray;
-    height: 2100px;
-}
+:root {
+            --primary: #00a2ff;
+            --bg: #0f1113;
+            --card-bg: #1b1d20;
+            --text: #ffffff;
+            --text-dim: #b1b1b1;
+        }
 
-.MainContainer{
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    height: 1900px;
-    background-color: white;
-    box-shadow: 0px 0px 50px 3px #3a3a3a
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.rbxcdn.com/f310344d320295240f9f30005d5d8520.jpg');
+            background-size: cover;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title { font-size: 3rem; color: var(--primary); margin-bottom: 0; }
+        .subtitle { font-size: 1.2rem; color: var(--text-dim); }
+
+        .section { margin: 50px 0; }
+        h2 { border-left: 4px solid var(--primary); padding-left: 15px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); border: 1px solid var(--primary); }
+
+        .tag {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.9rem; }

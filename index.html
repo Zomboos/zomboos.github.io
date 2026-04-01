@@ -7,8 +7,93 @@
 <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    <div class="MainContainer">
+
+    <header>
+        <div class="status-badge">● Available for Commissions</div>
+        <h1 class="title">ZOMBOOS</h1>
+        <p class="subtitle">Advanced Luau Programmer & Game Systems Architect</p>
+        <a href="#contact" class="contact-btn">Hire Me</a>
+    </header>
+
+    <div class="container">
         
+        <section class="section">
+            <h2>About Me</h2>
+            <p>I am <strong>Zomboos</strong>, a specialized Roblox Developer focused on creating robust backend systems and seamless gameplay mechanics. My philosophy revolves around writing clean, modular, and optimized code that scales with your game's growth.</p>
+        </section>
+
+        <section class="section">
+            <h2>Technical Skills</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Data Management</h3>
+                    <p>Expertise in ProfileService and ReplicaService for secure, session-locked data handling and state replication.</p>
+                </div>
+                <div class="card">
+                    <h3>Combat & Physics</h3>
+                    <p>Implementation of fast-paced combat systems using Raycasting, FastCast, and custom Hitbox modules.</p>
+                </div>
+                <div class="card">
+                    <h3>Frameworks</h3>
+                    <p>Proficient in Knit, OOP (Object Oriented Programming), and Task Library optimization.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Work Showcase</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Custom Inventory System</h3>
+                    <p>A fully dynamic, stackable inventory system with item metadata and secure server-side validation.</p>
+                    <span class="tag">OOP</span><span class="tag">UI/UX</span>
+                </div>
+                <div class="card">
+                    <h3>Ability System</h3>
+                    <p>A modular framework for easy integration of new player abilities with cooldowns and VFX triggers.</p>
+                    <span class="tag">Events</span><span class="tag">Modules</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <h2>Contact & Pricing</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Method</h3>
+                    <ul>
+                        <li><strong>Discord:</strong> @Zomboos</li>
+                        <li><strong>Roblox:</strong> [YourProfileLink]</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Rates</h3>
+                    <ul>
+                        <li><strong>Robux:</strong> Via Group Funds / Gamepasses</li>
+                        <li><strong>USD:</strong> PayPal / Stripe</li>
+                        <li><em>Prices vary based on project complexity.</em></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
     </div>
+
+    <footer>
+        &copy; 2026 Zomboos • Built for the Roblox Developer Community
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
