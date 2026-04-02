@@ -4,7 +4,11 @@
     --card-bg: #1b1d20;
     --text: #ffffff;
     --text-dim: #b1b1b1;
-    --accent: #00ff88; /* Added accent for availability badge */
+    --accent: #00ff88;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -16,33 +20,120 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Header Styling - Uses contained background image */
+/* ================== NAVBAR ================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(15, 17, 19, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* ================== HEADER ================== */
+
 .header {
-    min-height: 40vh; /* Changed height to min-height for responsiveness */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(15, 17, 19, 1)),
         url('noFilter.webp');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-bottom: 2px solid var(--primary);
-    padding: 20px; /* Added padding so content doesn't hit edges on mobile */
+    padding: 20px;
 }
 
 .status-badge {
     display: inline-block;
-    padding: 5px 12px;
+    padding: 6px 16px;
     border-radius: 20px;
     background: rgba(0, 255, 136, 0.1);
     color: var(--accent);
     font-size: 0.8rem;
-    margin-bottom: 205px;
+    margin-bottom: 24px;
     border: 1px solid rgba(0, 255, 136, 0.3);
+    animation: pulse-glow 3s ease-in-out infinite;
 }
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 136, 0.15); }
+    50% { box-shadow: 0 0 18px rgba(0, 255, 136, 0.3); }
+}
+
+.title {
+    font-size: 4rem;
+    color: var(--primary);
+    margin: 0;
+    letter-spacing: 6px;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+    margin-bottom: 32px;
+}
+
+.contact-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 14px 32px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 162, 255, 0.3);
+}
+
+/* ================== MAIN CONTAINER ================== */
 
 .container {
     max-width: 900px;
@@ -50,21 +141,10 @@ body {
     padding: 20px;
 }
 
-.title {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-top: 0px;
-    margin-bottom: 0;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: var(--text-dim);
-    margin-bottom: 100px;
-}
+/* ================== SECTIONS ================== */
 
 .section {
-    margin: 60px 0; /* Slightly increased margin for better breathing room */
+    margin: 80px 0;
 }
 
 h2 {
@@ -75,14 +155,27 @@ h2 {
     margin-bottom: 30px;
 }
 
-/* Original Grid Styling (Still used for Technical Skills and Contact) */
+/* ================== SCROLL REVEAL ================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================== GRID & CARDS ================== */
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
-/* Universal Card Styling (Hover effects) */
 .card {
     background: var(--card-bg);
     border-radius: 12px;
@@ -96,57 +189,50 @@ h2 {
     box-shadow: 0 10px 20px rgba(0, 162, 255, 0.1);
 }
 
-/* Styling specifically for original grid cards (Skills, Contact) */
 .grid .card {
     padding: 25px;
 }
 
-/* ================== NEW WORK SHOWCASE STYLING ================== */
+/* ================== WORK SHOWCASE ================== */
 
-/* Container for all showcase items */
 .showcase-container {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Space between different showcase examples */
+    gap: 30px;
 }
 
-/* Individual Showcase Item (Photo + Text) */
 .showcase-item {
     display: flex;
-    flex-direction: row; /* Aligns media and content side-by-side */
-    overflow: hidden; /* Keeps the media inside the card corners */
-    text-decoration: none; /* In case the whole card becomes a link later */
+    flex-direction: row;
+    overflow: hidden;
+    text-decoration: none;
     color: inherit;
 }
 
-/* Media (Photo/GIF) Container */
 .showcase-media {
-    flex: 1; /* Takes up half the space */
-    min-width: 40%; /* Minimum width for the image */
-    background: #000; /* Background color while image loads */
+    flex: 1;
+    min-width: 40%;
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* The actual image styling */
 .showcase-media img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image fills container without distortion */
+    object-fit: cover;
     display: block;
 }
 
-/* The text description and tags container */
 .showcase-content {
-    flex: 1; /* Takes up the other half of the space */
+    flex: 1;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically centers the text */
+    justify-content: center;
 }
 
-/* Adjust heading size inside the showcase content */
 .showcase-content h3 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -154,17 +240,15 @@ h2 {
     color: var(--text);
 }
 
-/* Container for tags */
 .tag-container {
     margin-top: 15px;
     display: flex;
-    flex-wrap: wrap; /* Tags wrap to the next line on narrow items */
+    flex-wrap: wrap;
     gap: 8px;
 }
 
-/* The actual tags */
 .tag {
-    background: rgba(0, 162, 255, 0.15); /* Slightly transparent background */
+    background: rgba(0, 162, 255, 0.15);
     color: var(--primary);
     padding: 4px 10px;
     border-radius: 6px;
@@ -174,59 +258,27 @@ h2 {
     border: 1px solid rgba(0, 162, 255, 0.3);
 }
 
-/* Responsive adjustments: Stack elements vertically on mobile/tablet */
-@media (max-width: 768px) {
-    .showcase-item {
-        flex-direction: column;
-    }
-    
-    .showcase-media {
-        min-height: 200px; /* Gives the image height when stacked */
-    }
+.view-project-btn {
+    align-self: flex-start;
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 10px 0 20px 0;
+    transition: all 0.2s ease;
 }
 
-/* ============================================================= */
-
-.contact-btn {
-    display: inline-block;
+.view-project-btn:hover {
     background: var(--primary);
     color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: opacity 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 162, 255, 0.3);
 }
 
-.contact-btn:hover {
-    opacity: 0.9;
-}
-
-/* Specific styling for Contact Lists */
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    margin-bottom: 10px;
-    color: var(--text-dim);
-}
-
-li strong {
-    color: var(--text);
-}
-
-footer {
-    text-align: center;
-    padding: 60px;
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-/* ================== LANGUAGE CARDS STYLING ================== */
+/* ================== LANGUAGE GRID ================== */
 
 .language-grid {
     display: grid;
@@ -238,7 +290,6 @@ footer {
 .lang-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid #0068a5;
-
     padding: 12px 15px;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -257,36 +308,68 @@ footer {
     color: var(--text);
 }
 
-/* Optional: Skill level bar */
-.lang-level {
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
+/* ================== CONTACT LINKS ================== */
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.level-fill {
-    height: 100%;
-    background: var(--primary);
-    box-shadow: 0 0 8px var(--primary);
+li {
+    margin-bottom: 10px;
+    color: var(--text-dim);
 }
-/* Styling for buttons inside the work showcase cards */
-.view-project-btn {
-    align-self: flex-start; /* Keeps button to the left */
-    background: transparent;
+
+li strong {
+    color: var(--text);
+}
+
+li a {
     color: var(--primary);
-    border: 1px solid var(--primary);
-    padding: 8px 18px;
-    border-radius: 6px;
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 10px 0 20px 0;
-    transition: all 0.2s ease;
+    transition: opacity 0.2s ease;
 }
 
-.view-project-btn:hover {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 162, 255, 0.3);
+li a:hover {
+    opacity: 0.8;
+}
+
+/* ================== FOOTER ================== */
+
+footer {
+    text-align: center;
+    padding: 60px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ================== RESPONSIVE ================== */
+
+@media (max-width: 768px) {
+    .showcase-item {
+        flex-direction: column;
+    }
+
+    .showcase-media {
+        min-height: 200px;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+    }
+
+    .navbar {
+        padding: 12px 16px;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+    }
 }
