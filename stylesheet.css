@@ -4,6 +4,7 @@
     --card-bg: #1b1d20;
     --text: #ffffff;
     --text-dim: #b1b1b1;
+    --accent: #00ff88; /* Added accent for availability badge */
 }
 
 body {
@@ -12,10 +13,12 @@ body {
     color: var(--text);
     margin: 0;
     line-height: 1.6;
+    scroll-behavior: smooth;
 }
 
+/* Header Styling - Uses contained background image */
 .header {
-    height: 40vh;
+    min-height: 40vh; /* Changed height to min-height for responsiveness */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,7 +30,18 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     border-bottom: 2px solid var(--primary);
+    padding: 20px; /* Added padding so content doesn't hit edges on mobile */
+}
 
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--accent);
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 255, 136, 0.3);
 }
 
 .container {
@@ -40,48 +54,138 @@ body {
     font-size: 3rem;
     color: var(--primary);
     margin-bottom: 0;
+    margin-top: 10px;
 }
 
 .subtitle {
     font-size: 1.2rem;
     color: var(--text-dim);
+    margin-top: 5px;
 }
 
 .section {
-    margin: 50px 0;
+    margin: 60px 0; /* Slightly increased margin for better breathing room */
 }
 
 h2 {
     border-left: 4px solid var(--primary);
     padding-left: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
 }
 
+/* Original Grid Styling (Still used for Technical Skills and Contact) */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
+/* Universal Card Styling (Hover effects) */
 .card {
     background: var(--card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    border-radius: 12px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
 }
 
 .card:hover {
     transform: translateY(-5px);
     border: 1px solid var(--primary);
+    box-shadow: 0 10px 20px rgba(0, 162, 255, 0.1);
 }
 
-.tag {
-    background: var(--primary);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    margin-right: 5px;
+/* Styling specifically for original grid cards (Skills, Contact) */
+.grid .card {
+    padding: 25px;
 }
+
+/* ================== NEW WORK SHOWCASE STYLING ================== */
+
+/* Container for all showcase items */
+.showcase-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between different showcase examples */
+}
+
+/* Individual Showcase Item (Photo + Text) */
+.showcase-item {
+    display: flex;
+    flex-direction: row; /* Aligns media and content side-by-side */
+    overflow: hidden; /* Keeps the media inside the card corners */
+    text-decoration: none; /* In case the whole card becomes a link later */
+    color: inherit;
+}
+
+/* Media (Photo/GIF) Container */
+.showcase-media {
+    flex: 1; /* Takes up half the space */
+    min-width: 40%; /* Minimum width for the image */
+    background: #000; /* Background color while image loads */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The actual image styling */
+.showcase-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills container without distortion */
+    display: block;
+}
+
+/* The text description and tags container */
+.showcase-content {
+    flex: 1; /* Takes up the other half of the space */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers the text */
+}
+
+/* Adjust heading size inside the showcase content */
+.showcase-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: var(--text);
+}
+
+/* Container for tags */
+.tag-container {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap; /* Tags wrap to the next line on narrow items */
+    gap: 8px;
+}
+
+/* The actual tags */
+.tag {
+    background: rgba(0, 162, 255, 0.15); /* Slightly transparent background */
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid rgba(0, 162, 255, 0.3);
+}
+
+/* Responsive adjustments: Stack elements vertically on mobile/tablet */
+@media (max-width: 768px) {
+    .showcase-item {
+        flex-direction: column;
+    }
+    
+    .showcase-media {
+        min-height: 200px; /* Gives the image height when stacked */
+    }
+}
+
+/* ============================================================= */
 
 .contact-btn {
     display: inline-block;
@@ -92,11 +196,33 @@ h2 {
     border-radius: 5px;
     font-weight: bold;
     margin-top: 20px;
+    transition: opacity 0.2s ease;
+}
+
+.contact-btn:hover {
+    opacity: 0.9;
+}
+
+/* Specific styling for Contact Lists */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    color: var(--text-dim);
+}
+
+li strong {
+    color: var(--text);
 }
 
 footer {
     text-align: center;
-    padding: 40px;
+    padding: 60px;
     color: var(--text-dim);
     font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
