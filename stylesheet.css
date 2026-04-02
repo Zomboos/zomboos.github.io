@@ -237,7 +237,8 @@ footer {
 
 .lang-card {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid #0068a5;
+
     padding: 12px 15px;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -253,7 +254,6 @@ footer {
     display: block;
     font-weight: bold;
     font-size: 0.9rem;
-    margin-bottom: 8px;
     color: var(--text);
 }
 
@@ -269,4 +269,24 @@ footer {
     height: 100%;
     background: var(--primary);
     box-shadow: 0 0 8px var(--primary);
+}
+/* Styling for buttons inside the work showcase cards */
+.view-project-btn {
+    align-self: flex-start; /* Keeps button to the left */
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 10px 0 20px 0;
+    transition: all 0.2s ease;
+}
+
+.view-project-btn:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 162, 255, 0.3);
 }
