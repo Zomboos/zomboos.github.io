@@ -24,8 +24,10 @@
     const gl = renderer.getContext();
     if (!gl) return;
 
+    canvas.style.width = '';
+    canvas.style.height = '';
+
     renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     if (THREE.SRGBColorSpace !== undefined) {
         renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -224,10 +226,11 @@
     wrap.addEventListener('pointerleave', resetPointer, { passive: true });
 
     function resize() {
-        const width = wrap.clientWidth;
-        const height = wrap.clientHeight;
+        const width = Math.round(canvas.clientWidth);
+        const height = Math.round(canvas.clientHeight);
         if (width < 1 || height < 1) return;
 
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
         renderer.setSize(width, height, false);
 
         const compact = width < 760;
@@ -237,32 +240,47 @@
         camera.fov = compact ? 39 : 34;
         camera.position.set(0, compact ? -0.12 : -0.1, compact ? 8.9 : 8.65);
         camera.updateProjectionMatrix();
-        camera.lookAt(0, compact ? -0.06 : -0.14, 0);
+        camera.lookAt(0, compact ? -0.06 : -0.1, 0);
 
         if (compact) {
             baseLogoX = 0.72;
-            baseLogoY = -0.14;
-            emblemRig.scale.setScalar(0.72);
+            baseLogoY = -0.1;
+            emblemRig.scale.setScalar(0.65);
             emblemRig.position.set(baseLogoX, baseLogoY, -0.08);
             return;
         }
 
         if (medium) {
             baseLogoX = 1.12;
-            baseLogoY = -0.34;
-            emblemRig.scale.setScalar(0.88);
+            baseLogoY = -0.26;
+            emblemRig.scale.setScalar(0.79);
             emblemRig.position.set(baseLogoX, baseLogoY, -0.02);
             return;
         }
 
         baseLogoX = 1.88;
-        baseLogoY = -0.46;
-        emblemRig.scale.setScalar(0.96);
+        baseLogoY = -0.36;
+        emblemRig.scale.setScalar(0.86);
         emblemRig.position.set(baseLogoX, baseLogoY, 0);
     }
 
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
+    function scheduleResize() {
+        resize();
+        requestAnimationFrame(resize);
+    }
+
+    scheduleResize();
+    window.addEventListener('resize', scheduleResize, { passive: true });
+    window.addEventListener('load', scheduleResize, { once: true });
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => scheduleResize());
+    }
+
+    if (typeof ResizeObserver !== 'undefined') {
+        const ro = new ResizeObserver(() => scheduleResize());
+        ro.observe(wrap);
+    }
 
     function renderFrame(time, dt) {
         currentRotX += (targetRotX - currentRotX) * 0.065;
